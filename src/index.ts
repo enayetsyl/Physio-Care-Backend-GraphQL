@@ -1,32 +1,79 @@
 import express from "express";
-   import cors from "cors";
-   import helmet from "helmet";
-   import hpp from "hpp";
-   import responseTime from "response-time";
-   import { config } from "./config";
-   import { connectDatabase } from "./config/database";
+import cors from "cors";
+import helmet from "helmet";
+import hpp from "hpp";
+import responseTime from "response-time";
+import { config } from "./config";
+import { connectDatabase } from "./config/database";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@as-integrations/express4";
+import { typeDefs, resolvers } from "./graphql";
 
-   const app = express();
+interface Context {
+  user?: { id: string };
+}
 
-   // Security middleware
-   app.use(helmet());
-   app.use(hpp());
-   app.use(cors());
-   app.use(express.json());
-   app.use(responseTime());
+const app = express();
 
-   // Health check endpoint
-   app.get("/health", (req, res) => {
-     res.json({
-       status: "ok",
-       timestamp: new Date().toISOString(),
-       environment: config.env,
-     });
-   });
+// Security middleware
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+    contentSecurityPolicy: {
+      directives: {
+        imgSrc: [
+          `'self'`,
+          "data:",
+          "apollo-server-landing-page.cdn.apollographql.com",
+        ],
+        scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+        manifestSrc: [
+          `'self'`,
+          "apollo-server-landing-page.cdn.apollographql.com",
+        ],
+        frameSrc: [`'self'`, "sandbox.embed.apollographql.com"],
+      },
+    },
+  })
+);
+app.use(hpp());
+app.use(cors());
+app.use(express.json());
+app.use(responseTime());
 
-   app.listen(config.port, async() => {
-    await connectDatabase();
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    environment: config.env,
+  });
+});
 
-     console.log(`🚀 Server running at http://localhost:${config.port}`);
-     console.log(`📋 Health check: http://localhost:${config.port}/health`);
-   });
+const startServer = async () => {
+  await connectDatabase();
+
+  const server = new ApolloServer<Context>({
+    typeDefs,
+    resolvers,
+  });
+
+  await server.start();
+
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: async ({ req }: { req: express.Request }) => {
+        // TODO: Extract user from JWT token
+        return { user: undefined };
+      },
+    })
+  );
+
+  app.listen(config.port, () => {
+    console.log(`🚀 Server running at http://localhost:${config.port}`);
+    console.log(`📊 GraphQL endpoint: http://localhost:${config.port}/graphql`);
+  });
+};
+
+startServer();

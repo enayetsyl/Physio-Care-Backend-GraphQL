@@ -8,10 +8,7 @@ import { connectDatabase } from "./config/database";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@as-integrations/express4";
 import { typeDefs, resolvers } from "./graphql";
-
-interface Context {
-  user?: { id: string };
-}
+import { AuthContext } from "./middleware/auth.middleware";
 
 const app = express();
 
@@ -53,9 +50,18 @@ app.get("/health", (req, res) => {
 const startServer = async () => {
   await connectDatabase();
 
-  const server = new ApolloServer<Context>({
+  const server = new ApolloServer<AuthContext>({
     typeDefs,
     resolvers,
+    formatError: (error) => {
+      return {
+        message: error.message,
+        code: error.extensions?.code || "INTERNAL_ERROR",
+        ...(process.env.NODE_ENV === "development" && {
+          stack: error.extensions?.stacktrace,
+        }),
+      };
+    },
   });
 
   await server.start();

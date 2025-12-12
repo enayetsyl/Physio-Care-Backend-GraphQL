@@ -63,9 +63,20 @@ const startServer = async () => {
   app.use(
     "/graphql",
     expressMiddleware(server, {
-      context: async ({ req }: { req: express.Request }) => {
-        // TODO: Extract user from JWT token
-        return { user: undefined };
+      context: async ({ req }) => {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+          return { user: undefined };
+        }
+
+        const token = authHeader.substring(7);
+        try {
+          const { verifyToken } = await import("./utils/jwt");
+          const payload = verifyToken(token);
+          return { user: payload };
+        } catch {
+          return { user: undefined };
+        }
       },
     })
   );

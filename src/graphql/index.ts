@@ -10,6 +10,8 @@ import { consultantTypeDef } from "./typeDefs/consultant.typeDef";
 import { consultantResolver } from "./resolvers/consultant.resolver";
 import { appointmentTypeDef } from "./typeDefs/appointment.typeDef";
 import { appointmentResolver } from "./resolvers/appointment.resolver";
+import { paymentTypeDef } from "./typeDefs/payment.typeDef";
+import { paymentResolver } from "./resolvers/payment.resolver";
 import { wrapResolvers } from "./utils/wrapResolvers";
 
 export const typeDefs = [
@@ -19,6 +21,7 @@ export const typeDefs = [
   centerTypeDef,
   consultantTypeDef,
   appointmentTypeDef,
+  paymentTypeDef,
 ];
 export const resolvers = wrapResolvers([
   userResolver,
@@ -27,4 +30,5 @@ export const resolvers = wrapResolvers([
   centerResolver,
   consultantResolver,
   appointmentResolver,
+  paymentResolver,
 ]);

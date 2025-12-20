@@ -1,0 +1,50 @@
+
+> physio-care-backend@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/index.ts
+
+[INFO] 09:55:53 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+[dotenv@17.2.3] injecting env (12) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+(node:20608) [MONGOOSE] Warning: Duplicate schema index on {"mobile":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20608) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+✅ MongoDB connected successfully
+🚀 Server running at http://localhost:4000
+📊 GraphQL endpoint: http://localhost:4000/graphql
+[INFO] 11:38:30 Restarting: C:\pHero\Hobby\react-native-learning\physio-care-backend\src\services\payment.service.ts has been modified
+[dotenv@17.2.3] injecting env (12) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+(node:34368) [MONGOOSE] Warning: Duplicate schema index on {"mobile":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34368) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+✅ MongoDB connected successfully
+Error: listen EADDRINUSE: address already in use :::4001
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at Server.listen (node:net:2101:7)
+    at Function.listen (C:\pHero\Hobby\react-native-learning\physio-care-backend\node_modules\express\lib\application.js:635:24)
+    at startServer (C:\pHero\Hobby\react-native-learning\physio-care-backend\src\index.ts:90:7)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[ERROR] 11:38:56 Error: listen EADDRINUSE: address already in use :::4001
+[INFO] 11:40:05 Restarting: C:\pHero\Hobby\react-native-learning\physio-care-backend\src\services\payment.service.ts has been modified
+[dotenv@17.2.3] injecting env (12) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+(node:32696) [MONGOOSE] Warning: Duplicate schema index on {"mobile":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:32696) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+✅ MongoDB connected successfully
+🚀 Server running at http://localhost:4001
+📊 GraphQL endpoint: http://localhost:4001/graphql
+[INFO] 11:42:57 Restarting: C:\pHero\Hobby\react-native-learning\physio-care-backend\src\graphql\resolvers\payment.resolver.ts has been modified
+[dotenv@17.2.3] injecting env (12) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+(node:23472) [MONGOOSE] Warning: Duplicate schema index on {"mobile":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23472) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+✅ MongoDB connected successfully
+🚀 Server running at http://localhost:4001
+📊 GraphQL endpoint: http://localhost:4001/graphql
+[INFO] 11:49:08 Restarting: C:\pHero\Hobby\react-native-learning\physio-care-backend\src\graphql\resolvers\payment.resolver.ts has been modified
+[dotenv@17.2.3] injecting env (12) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+(node:34840) [MONGOOSE] Warning: Duplicate schema index on {"mobile":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34840) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+✅ MongoDB connected successfully
+🚀 Server running at http://localhost:4001
+📊 GraphQL endpoint: http://localhost:4001/graphql
